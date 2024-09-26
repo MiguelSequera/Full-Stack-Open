@@ -6,7 +6,7 @@ sequenceDiagram
 
     browser->>server: POST to https://studies.cs.helsinki.fi/exampleapp/new_notes
     activate server
-    server-->>browser: Responds with status code 302  asks the browser to perform a new HTTP GET 
+    server-->>browser: Responds with status code 302 ( URL redirect)  asks the browser to perform a new HTTP GET 
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
