@@ -10,6 +10,4 @@ sequenceDiagram
 
 
     browser->>server: Rerender note list and send new list to server
-
-
-    ```
+  ```
