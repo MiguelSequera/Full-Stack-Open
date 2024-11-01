@@ -4,12 +4,15 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>statistics</h1>
-      <p style={{margin:0}}>good {props.good}</p>
-      <p style={{margin:0}}>neutral {props.neutral}</p>
-      <p style={{margin:0}}>bad {props.bad}</p>
-      <p style={{margin:0}}>all {props.all}</p>
-      <p style={{margin:0}}>average {(props.all === 0 ? 0 : props.average / props.all)}</p>
-      <p style={{margin:0}}>positive {(props.all === 0 ? 0 :(props.good*100)/props.all)}%</p>
+      <p style={{display: props.active === 1 ? 'none' : 'block'}}>No feedback given</p>
+      <section style={{display: props.active === 0 ? 'none' : 'block'}}>
+        <p style={{margin: 0 }}>good {props.good}</p>
+        <p style={{margin:0}}>neutral {props.neutral}</p>
+        <p style={{margin:0}}>bad {props.bad}</p>
+        <p style={{margin:0}}>all {props.all}</p>
+        <p style={{margin:0}}>average {(props.all === 0 ? 0 : props.average / props.all)}</p>
+        <p style={{margin:0}}>positive {props.all === 0 ? 0 :(props.good*100)/props.all}%</p>
+      </section>
     </div>
   )
 }
@@ -21,22 +24,25 @@ const App = () => {
   const [bad, setBad] = useState(0)
   const [all, setAll] = useState(0)
   const [average, setAverage] = useState(0)
+  const [active, setActive] = useState(0)
 
 
   const handleClickGood = () => {
     setAverage(currentValue => currentValue + 1)
     setGood(currentValue => currentValue + 1)
     setAll(currentValue => currentValue + 1)
-    
+    setActive(1)
   }
   const handleClickNeutral = () => {
     setNeutral(currentValue => currentValue + 1)
     setAll(currentValue => currentValue + 1)
+    setActive(1)
   }
   const handleClickBad = () => {
     setAverage(currentValue => currentValue - 1)
     setBad(currentValue => currentValue + 1)
     setAll(currentValue => currentValue + 1)
+    setActive(1)
   }
 
   return (
@@ -51,6 +57,7 @@ const App = () => {
         bad = {bad}
         all = {all}
         average = {average}
+        active = {active}
       />
     </>
   )
