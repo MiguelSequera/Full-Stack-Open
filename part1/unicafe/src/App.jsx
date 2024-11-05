@@ -6,14 +6,52 @@ const Statistics = (props) => {
       <h1>statistics</h1>
       <p style={{display: props.active === 1 ? 'none' : 'block'}}>No feedback given</p>
       <section style={{display: props.active === 0 ? 'none' : 'block'}}>
-        <p style={{margin: 0 }}>good {props.good}</p>
-        <p style={{margin:0}}>neutral {props.neutral}</p>
-        <p style={{margin:0}}>bad {props.bad}</p>
-        <p style={{margin:0}}>all {props.all}</p>
-        <p style={{margin:0}}>average {(props.all === 0 ? 0 : props.average / props.all)}</p>
-        <p style={{margin:0}}>positive {props.all === 0 ? 0 :(props.good*100)/props.all}%</p>
+      <StatisticsLine 
+          style={{margin: 0 }}
+          text="good" 
+          value={props.good}
+        /> 
+        <StatisticsLine 
+          style={{margin: 0 }}
+          text="neutral" 
+          value={props.neutral}
+        /> 
+        <StatisticsLine 
+          style={{margin: 0 }}
+          text="bad" 
+          value={props.bad}
+        /> 
+        <StatisticsLine 
+          style={{margin: 0 }}
+          text="all" 
+          value={props.all}
+        /> 
+        <StatisticsLine 
+          style={{margin: 0 }}
+          text="average" 
+          value={props.all === 0 ? 0 : props.average / props.all}
+        /> 
+        <StatisticsLine 
+          style={{margin: 0 }}
+          text="positive" 
+          text2= "%"
+          value={props.all === 0 ? 0 :(props.good*100)/props.all}
+        />
       </section>
     </div>
+  )
+}
+
+const Button = (props) => {
+  return(
+    <button onClick={props.handleClick}>{props.text}</button>
+  )
+}
+
+
+const StatisticsLine = (props) => {
+  return(
+    <p>{props.text} {props.value}{props.text2}</p>
   )
 }
 
@@ -48,9 +86,15 @@ const App = () => {
   return (
     <>
       <h1>give feedback</h1>
-      <button onClick={handleClickGood}>good</button>
-      <button onClick={handleClickNeutral}>neutral</button>
-      <button onClick={handleClickBad}>bad</button>
+      <Button 
+        handleClick={handleClickGood} 
+        text="good"/>
+      <Button 
+        handleClick={handleClickNeutral} 
+        text="neutral"/>
+      <Button 
+        handleClick={handleClickBad} 
+        text="bad"/>
       <Statistics 
         good = {good}
         neutral = {neutral}
@@ -64,3 +108,12 @@ const App = () => {
 }
 
 export default App
+
+
+/*
+
+
+
+
+
+*/ 
