@@ -6,7 +6,9 @@ const Statistics = (props) => {
       <h1>statistics</h1>
       <p style={{display: props.active === 1 ? 'none' : 'block'}}>No feedback given</p>
       <section style={{display: props.active === 0 ? 'none' : 'block'}}>
-      <StatisticsLine 
+      <table>
+        <tbody>
+        <StatisticsLine 
           style={{margin: 0 }}
           text="good" 
           value={props.good}
@@ -29,14 +31,15 @@ const Statistics = (props) => {
         <StatisticsLine 
           style={{margin: 0 }}
           text="average" 
-          value={props.all === 0 ? 0 : props.average / props.all}
+          value={(props.all === 0 ? 0 : props.average / props.all).toFixed(1)}
         /> 
         <StatisticsLine 
           style={{margin: 0 }}
           text="positive" 
-          text2= "%"
-          value={props.all === 0 ? 0 :(props.good*100)/props.all}
+          value={`${(props.all === 0 ? 0 :(props.good*100)/props.all).toFixed(1)}%`}
         />
+        </tbody>
+      </table>
       </section>
     </div>
   )
@@ -51,7 +54,10 @@ const Button = (props) => {
 
 const StatisticsLine = (props) => {
   return(
-    <p>{props.text} {props.value}{props.text2}</p>
+        <tr>
+          <td>{props.text}</td>
+          <td>{props.value}</td>
+        </tr>
   )
 }
 
