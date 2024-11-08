@@ -21,21 +21,31 @@ const App = () => {
     const copy = { ...points }
     copy[selected] += 1 
     setPoint(copy)    
+    setWinner((Object.keys(copy).reduce((a, b) => copy[a] > copy[b] ? a : b)))
   }
 
   const [selected, setSelected] = useState(0)
   const [points, setPoint] = useState({ 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 })
+  const [winner, setWinner] = useState (0)
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {points[selected]}</p>
-      <button onClick={handleClickVote}>
-        vote
-      </button>
-      <button onClick={handleClick}>
-        next anecdote
-      </button>
+      <section>
+        <h1>Anecdote of the day</h1>
+        <p>{anecdotes[selected]}</p>
+        <p>has {points[selected]}</p>
+        <button onClick={handleClickVote}>
+          vote
+        </button>
+        <button onClick={handleClick}>
+          next anecdote
+        </button>
+      </section>
+      <section>
+        <h1>Anecdote with most votes</h1>
+        <p>{anecdotes[winner]}</p>
+        <p>has {points[winner]}</p>
+      </section>
     </div>
   )
 }
