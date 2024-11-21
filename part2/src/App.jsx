@@ -16,7 +16,12 @@ const course = {
       name: 'State of a component',
       exercises: 14,
       id: 3
-    }
+    },
+    {
+      name: 'Redux',
+      exercises: 11,
+      id: 4
+    },
   ]
 }
 
@@ -42,9 +47,10 @@ const Content = ({parts}) => {
   )
 }
 
-const Total = (props) =>{
+const Total = ({parts}) =>{
+  const totalArray = parts.map(part => part.exercises)
   return(
-    <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
+    <p><b>total of {totalArray.reduce((accumulator, currenValue)=> accumulator + currenValue)} exercises</b></p>
   )
 }
 
