@@ -2,20 +2,20 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: '040-1234567'},
   ]) 
-  const [newName, setNewName] = useState('')
+  const [newName, setNewName] = useState({name:'', number:''})
 
   const addPerson = (event) =>{
     event.preventDefault()
-    const newPerson = {name: newName}
-    const comparation = (element) => JSON.stringify(element) === JSON.stringify(newPerson)
+    const newPerson = {name: newName.name, number: newName.number}
+    const comparation = (element) => JSON.stringify(element.name) === JSON.stringify(newPerson.name)
     const alreadyExists = persons.some(comparation)
     if (alreadyExists){
-      alert(`${newName} already exists`)
+      alert(`${newName.name} already exists`)
     } else {
       setPersons(persons.concat(newPerson))
-      setNewName('')
+      setNewName({name:'', number:''})
     }
   }
 
@@ -25,8 +25,14 @@ const App = () => {
       <form onSubmit={addPerson}>
         <div>
           name: <input 
-                  value={newName}
-                  onChange={(e)=>setNewName(e.target.value)}
+                  value={newName.name}
+                  onChange={(e)=>setNewName({name:e.target.value, number:newName.number})}
+                />
+        </div>
+        <div>
+          number: <input 
+                  value={newName.number}
+                  onChange={(e)=>setNewName({name:newName.name,number:e.target.value})}
                 />
         </div>
         <div>
@@ -34,7 +40,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <div>{persons.map(person => <li key={person.name}>{person.name}</li>)}</div>
+      <div>{persons.map(person => <li key={person.name}>{person.name} {person.number}</li>)}</div>
     </div>
   )
 }
