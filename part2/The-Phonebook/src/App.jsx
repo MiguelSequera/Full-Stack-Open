@@ -9,8 +9,14 @@ const App = () => {
   const addPerson = (event) =>{
     event.preventDefault()
     const newPerson = {name: newName}
-    setPersons(persons.concat(newPerson))
-    setNewName('')
+    const comparation = (element) => JSON.stringify(element) === JSON.stringify(newPerson)
+    const alreadyExists = persons.some(comparation)
+    if (alreadyExists){
+      alert(`${newName} already exists`)
+    } else {
+      setPersons(persons.concat(newPerson))
+      setNewName('')
+    }
   }
 
   return (
@@ -28,7 +34,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <div>{persons.map(person => <li key={name}>{person.name}</li>)}</div>
+      <div>{persons.map(person => <li key={person.name}>{person.name}</li>)}</div>
     </div>
   )
 }
