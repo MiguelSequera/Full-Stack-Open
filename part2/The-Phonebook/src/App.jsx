@@ -11,8 +11,8 @@ const App = () => {
 
   useEffect (() => {
     axios
-    .get ('http://localhost:3001/persons')
-    .then (res => {setPersons (res.data)})
+      .get ('http://localhost:3001/persons')
+      .then (res => {setPersons (res.data)})
   }, [])
 
   const addPerson = (event) =>{
@@ -23,9 +23,14 @@ const App = () => {
     if (alreadyExists){
       alert(`${newName.name} already exists`)
     } else {
-      setPersons(persons.concat(newPerson))
-      setNewName({name:'', number:''})
+      axios
+      .post ('http://localhost:3001/persons', newPerson)
+      .then (res => {
+        setPersons(persons.concat(res.data))
+        setNewName({name:'', number:''})
+      })
     }
+
   }
 
   const handleChange = (e) => {
