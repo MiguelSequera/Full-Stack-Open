@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Search from './Components/Search'
 import NewPerson from './Components/NewPerson'
 import Numbers from './Components/Numbers'
-import axios from 'axios'
+import phoneNumbers from './services/phoneNumbers'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -10,9 +10,8 @@ const App = () => {
   const [search, setSearch] = useState('')
 
   useEffect (() => {
-    axios
-      .get ('http://localhost:3001/persons')
-      .then (res => {setPersons (res.data)})
+    phoneNumbers.getNumber()
+    .then (res => {setPersons (res.data)})
   }, [])
 
   const addPerson = (event) =>{
@@ -23,8 +22,7 @@ const App = () => {
     if (alreadyExists){
       alert(`${newName.name} already exists`)
     } else {
-      axios
-      .post ('http://localhost:3001/persons', newPerson)
+      phoneNumbers.postNumber(newPerson)
       .then (res => {
         setPersons(persons.concat(res.data))
         setNewName({name:'', number:''})
