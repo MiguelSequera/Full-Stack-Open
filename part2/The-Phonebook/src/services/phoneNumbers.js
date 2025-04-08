@@ -12,7 +12,12 @@ const postNumber = newPerson => {
   return axios.post (url, newPerson)
 }
 
+const deleteNumber = (id) => {
+  return axios.delete (`${url}/${id}`)
+}
+
 export default {
   getNumber,
-  postNumber
+  postNumber,
+  deleteNumber
 }

@@ -12,6 +12,7 @@ const App = () => {
   useEffect (() => {
     phoneNumbers.getNumber()
     .then (res => {setPersons (res.data)})
+    .catch ( err => {console.log (err)})
   }, [])
 
   const addPerson = (event) =>{
@@ -27,8 +28,8 @@ const App = () => {
         setPersons(persons.concat(res.data))
         setNewName({name:'', number:''})
       })
+      .catch ( err => {console.log (err)})
     }
-
   }
 
   const handleChange = (e) => {
@@ -54,6 +55,8 @@ const App = () => {
       <h2>Numbers</h2>
       <Numbers
         filteredPersons={filteredPersons}
+        setPersons={setPersons}
+        persons={persons}
       />
     </div>
   )
