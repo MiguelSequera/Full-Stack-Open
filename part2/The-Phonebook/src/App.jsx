@@ -21,7 +21,14 @@ const App = () => {
     const comparation = (element) => JSON.stringify(element.name) === JSON.stringify(newPerson.name)
     const alreadyExists = persons.some(comparation)
     if (alreadyExists){
-      alert(`${newName.name} already exists`)
+      const inx = persons.findIndex(objeto => objeto.name === newPerson.name)
+      if(window.confirm(`Want to change the number of ${newPerson.name}` )){
+        const changeNumber = {...persons[inx], number: newPerson.number}
+        phoneNumbers.changePerson (persons[inx].id, changeNumber )
+        .then (res => {
+          setPersons(persons.map(p => p.id === res.data.id ? res.data : p))
+        })
+      }
     } else {
       phoneNumbers.postNumber(newPerson)
       .then (res => {
